@@ -1,0 +1,40 @@
+{
+   /*
+    * I found the most common Jeopardy categories at 
+    * http://www.slate.com/articles/arts/culturebox/2011/02/ill_take_jeopardy_trivia_for_200_alex.html
+    * I'm not sure how accurate they are, but it's a place to start
+    */
+
+   categories: [
+      {
+         name: "Sports"
+      },
+      {
+         name: "Potpourri"
+      },
+      {
+         name: "Animals"
+      },
+      {
+         name: "American History"
+      },
+      {
+         name: "Science"
+      },
+      {
+         name: "State Capitals"
+      },
+      {
+         name: "Television"
+      },
+      {
+         name: "U.S. Cities"
+      },
+      {
+         name: "Pop Music"
+      },
+      {
+         name: "Transportation"
+      }
+   ]
+}
