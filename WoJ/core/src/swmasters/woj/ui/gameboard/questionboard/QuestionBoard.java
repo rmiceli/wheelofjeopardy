@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
-import swmasters.woj.model.Category;
-import swmasters.woj.model.Question;
+import swmasters.woj.core.Category;
+import swmasters.woj.core.Question;
 
 public class QuestionBoard extends WidgetGroup {
 

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
-import swmasters.woj.model.Category;
+import swmasters.woj.core.Category;
 import swmasters.woj.ui.gameboard.wheel.Sector.SectorType;
 
 public class Wheel extends WidgetGroup {

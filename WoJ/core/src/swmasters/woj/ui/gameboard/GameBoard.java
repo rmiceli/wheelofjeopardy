@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
-import swmasters.woj.model.Game;
+import swmasters.woj.core.Game;
 
 public class GameBoard extends WidgetGroup {
 	private ShapeRenderer renderer = new ShapeRenderer();

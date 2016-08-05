@@ -1,6 +1,6 @@
 package swmasters.woj.ui.gameboard.wheel;
 
-import swmasters.woj.model.Category;
+import swmasters.woj.core.Category;
 
 public class Sector {
 	public enum SectorType {

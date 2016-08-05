@@ -1,18 +1,18 @@
-package swmasters.woj.model;
+package swmasters.woj.core;
 
 public class Player {
-   private String name;          /*!< player's name */
-   private int score;            /*!< player's score */
-   private int freeTurnCount;    /*!< number of free turns available */
+   private String name;          /**< player's name */
+   private int score;            /**< player's score */
+   private int freeTurnCount;    /**< number of free turns available */
    
-   /*!
+   /**
     * @brief Contruct a player with name
     */
    public Player(String name) {
       this.name = name;
    }
    
-   /*!
+   /**
     * @brief Return player's score
     *
     * @returns Player's score
@@ -21,7 +21,7 @@ public class Player {
       return this.score;
    }
 
-   /*!
+   /**
     * @brief Increase player's score by points
     *
     * @param[in] points
@@ -33,7 +33,7 @@ public class Player {
       }
    }
 
-   /*!
+   /**
     * @brief Decrease player's score by points
     *
     * @param[in] points
@@ -45,14 +45,14 @@ public class Player {
       }
    }
 
-   /*!
+   /**
     * @brief Zeros out player's score
     */
    public void bankrupt() {
       this.score = 0;
    }
 
-   /*!
+   /**
     * @brief add a free turn
     * Free turn count increases by one
     */
@@ -60,7 +60,7 @@ public class Player {
       this.freeTurnCount++;
    }
 
-   /*!
+   /**
     * @brief use a free turn
     * Free turn count decreases by one
     */
@@ -72,7 +72,7 @@ public class Player {
       return true;
    }
    
-   /*!
+   /**
     * @brief Return player's name
     *
     * @returns player's name

@@ -1,4 +1,4 @@
-package swmasters.woj.model;
+package swmasters.woj.core;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class Game {
     * @brief Handle player spinning a category
     */
    private void onSpinCategory() {
-
+      /** TODO handle category spin */
    }
 
    /**
@@ -47,6 +47,7 @@ public class Game {
     * @brief Handle player spinning lose a turn
     */
    private void onSpinLoseTurn() {
+      /** TODO handle lose a turn spin */
       currentPlayer = getNextPlayer();
    }
 
@@ -54,6 +55,7 @@ public class Game {
     * @brief Handle player spinning opponent's choice
     */
    private void onSpinOpponentsChoice() {
+      /** TODO handle opponent's choice spin */
       /** TODO launch category choice dialog with getNextPlayer() selected */
    }
 
@@ -61,6 +63,7 @@ public class Game {
     * @brief Handle player spinning player's choice
     */
    private void onSpinPlayersChoice() {
+      /** TODO handle player's choice spin */
       /** TODO launch category choice dialog with currentPlayer selected */
    }
 
@@ -68,7 +71,8 @@ public class Game {
     * @brief Handle player spinning a spin again
     */
    private void onSpinSpinAgain() {
-      /* this has UI side effects but no effect on the model */
+      /** TODO handle spin again spin */
+      /** This should have UI side effects but no effect on the model */
    } 
 
    /**
@@ -99,29 +103,29 @@ public class Game {
             onSpinBankrupt();
             break;
          case SECTOR_TYPE_CATEGORY:
-            /** TODO handle category spin */
+            onSpinCategory();
             break;
          case SECTOR_TYPE_FREE_TURN:
-            /** TODO handle free turn spin */
+            onSpinFreeTurn();
             break;
          case SECTOR_TYPE_LOSE_TURN:
-            /** TODO handle lose a turn spin */
+            onSpinLoseTurn();
             break;
          case SECTOR_TYPE_OPPONENTS_CHOICE:
-            /** TODO handle opponent's choice spin */
+            onSpinOpponentsChoice();
             break;
          case SECTOR_TYPE_PLAYERS_CHOICE:
-            /** TODO handle player's choice spin */
+            onSpinPlayersChoice();
             break;
          case SECTOR_TYPE_SPIN_AGAIN:
-            /** TODO handle spin again spin */
+            onSpinSpinAgain();
             break;
       }
    }
 
    /**
     * @return 
-    * @brief initialize a 2-player game
+    * @brief Initialize a 2-player game
     *
     * @param[in] player1
     *    first player
