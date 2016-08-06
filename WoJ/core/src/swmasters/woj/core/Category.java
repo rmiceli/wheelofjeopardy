@@ -6,15 +6,14 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 
 public class Category {
-	private String name;                      /**< name of category */
-	private ArrayList<Question> questions;    /**< list of questions selected for this category */
-		
+   private String name;                      /**< name of category */
+   private ArrayList<Question> questions;    /**< list of questions selected for this category */
+      
    /**
     * @brief Construct a Category
     */
-	public Category() {
-		
-	}
+   public Category() {
+   }
 
    /**
     * @brief Construct a category from a JSON string
@@ -22,8 +21,8 @@ public class Category {
     * @param[in] jsonCategory
     *    The JSON that contains the category data
     */
-	public Category(JsonValue jsonCategory) {
-	}
+   public Category(JsonValue jsonCategory) {
+   }
 
    /**
     * @brief Change the name of the Category
@@ -31,20 +30,20 @@ public class Category {
     * @param[in] name
     *    The name to set
     */
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+   public void setName(String name) {
+      this.name = name;
+   }
+   
    /**
     * @brief Used by JsonBeans to serialize this class to JSON
     *
     * @param[in] json
     *    Handle to the Json object
     */
-	public void write(Json json) {
-		json.writeValue(name);
-	}
-	
+   public void write(Json json) {
+      json.writeValue(name);
+   }
+   
    /**
     * @brief Used by JsonBeans to serialize this class from JSON
     *
@@ -53,7 +52,7 @@ public class Category {
     * @param[in] jsonMap
     *    The JSON to use to fill out this class
     */
-	public void read(Json json, JsonValue jsonMap) {
-		name = jsonMap.child().name();
-	}
+   public void read(Json json, JsonValue jsonMap) {
+      name = jsonMap.child().name();
+   }
 }
