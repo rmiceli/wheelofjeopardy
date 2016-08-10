@@ -1,6 +1,15 @@
 package swmasters.woj.core;
 
 import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import swmasters.woj.ui.gameboard.wheel.Sector;
 import swmasters.woj.ui.gameboard.wheel.Wheel;
@@ -73,7 +82,7 @@ public class Game {
    private void onSpinSpinAgain() {
       /** TODO handle spin again spin */
       /** This should have UI side effects but no effect on the model */
-   } 
+   }
 
    /**
     * @brief Select 6 categories from the data file
@@ -86,11 +95,51 @@ public class Game {
 
    /**
     * @brief Select 5 questions for each of the 6 categories
-    * from the questions/* data files
+    * from the questions data files
     */
    public void generateQuestions() {
-      /** TODO read in question file for each category and
-       *  randomly pick 5 questions from the list */
+
+        try {
+
+            JSONParser parser = new JSONParser();
+
+            // Search for all files in questions directory or combine all
+            Object obj = (JSONObject) parser.parse(new FileReader(
+                    "../../assets/data/questions/questions.json"));
+
+            // Read question database as json object
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray categoryList = (JSONArray) jsonObject.get("database");
+
+            // Read categories from database
+            Iterator<JSONObject> c_iterator = categoryList.iterator();
+            while (c_iterator.hasNext()) {
+                JSONObject cat = c_iterator.next();
+                String category = (String) cat.get("Category");
+
+                // TODO create new category instance
+                // new Category setCategoryName;
+
+                // Read questions from category
+                JSONArray questionList = (JSONArray) cat.get("Questions");
+                Iterator<JSONObject> q_iterator = questionList.iterator();
+                while (q_iterator.hasNext()) {
+                    JSONObject qa = q_iterator.next();
+                    String question = (String) qa.get("question");
+                    String answer = (String) qa.get("answer");
+
+                    // TODO create new question instance
+                    // new Question setQuestion, setAnswer;
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
    }
 
    /**
@@ -124,7 +173,7 @@ public class Game {
    }
 
    /**
-    * @return 
+    * @return
     * @brief Initialize a 2-player game
     *
     * @param[in] player1
@@ -141,7 +190,7 @@ public class Game {
      this.players.add(player2);
      this.currentPlayer = 0;
    }
-   
+
    /**
     * @brief Construct a 2-player game
     *
