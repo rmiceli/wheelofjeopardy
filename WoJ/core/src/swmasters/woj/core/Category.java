@@ -55,4 +55,18 @@ public class Category {
    public void read(Json json, JsonValue jsonMap) {
       name = jsonMap.child().name();
    }
+   
+   /**
+    * @brief Get the next unanswered question from this category
+    * 
+    * @returns current question
+    */
+   public Question getNextQuestion(){
+	   int index = 0;
+	   Question currentQuestion = questions.get(index);
+	   while(currentQuestion.getAnswered() == true){
+		   currentQuestion = questions.get(index + 1);
+	   }
+	   return currentQuestion;
+   }
 }

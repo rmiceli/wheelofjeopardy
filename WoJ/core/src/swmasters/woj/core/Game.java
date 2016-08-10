@@ -2,6 +2,7 @@ package swmasters.woj.core;
 
 import java.util.ArrayList;
 
+import swmasters.woj.ui.gameboard.questionboard.QuestionBoardTile;
 import swmasters.woj.ui.gameboard.wheel.Sector;
 import swmasters.woj.ui.gameboard.wheel.Wheel;
 
@@ -32,8 +33,11 @@ public class Game {
    /**
     * @brief Handle player spinning a category
     */
-   private void onSpinCategory() {
+   private void onSpinCategory(Category currentCategory) {
       /** TODO handle category spin */
+	   Question currentQuestion = currentCategory.getNextQuestion();
+	   
+	// Must display question panel
    }
 
    /**
@@ -47,8 +51,14 @@ public class Game {
     * @brief Handle player spinning lose a turn
     */
    private void onSpinLoseTurn() {
-      /** TODO handle lose a turn spin */
-      currentPlayer = getNextPlayer();
+      /** TODO add prompt to user to use token or not */
+	   Player player = players.get(currentPlayer);
+	   if(player.useAFreeTurn() == true){
+		   onSpinSpinAgain();
+	   }
+	   else{
+		   currentPlayer = getNextPlayer();
+	   }
    }
 
    /**
@@ -57,6 +67,16 @@ public class Game {
    private void onSpinOpponentsChoice() {
       /** TODO handle opponent's choice spin */
       /** TODO launch category choice dialog with getNextPlayer() selected */
+	   int previousPlayer = currentPlayer;
+	   currentPlayer = getNextPlayer();
+	   
+	   // Next player chooses category for the current player
+	   // Must display choices and retrieve their chosen category
+	   Category chosenCategory = new Category();
+	   
+	   // Return control to current player and go to category spin event
+	   currentPlayer = previousPlayer;
+	   onSpinCategory(chosenCategory);
    }
 
    /**
@@ -65,6 +85,13 @@ public class Game {
    private void onSpinPlayersChoice() {
       /** TODO handle player's choice spin */
       /** TODO launch category choice dialog with currentPlayer selected */
+	   
+	   // Current player chooses their category
+	   // Must display choices and retrieve their chosen category
+	   Category chosenCategory = new Category();
+	   
+	   // Go to category spin event
+	   onSpinCategory(chosenCategory);
    }
 
    /**
@@ -103,7 +130,7 @@ public class Game {
             onSpinBankrupt();
             break;
          case SECTOR_TYPE_CATEGORY:
-            onSpinCategory();
+            onSpinCategory(sector.getCategory());
             break;
          case SECTOR_TYPE_FREE_TURN:
             onSpinFreeTurn();
