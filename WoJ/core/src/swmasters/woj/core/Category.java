@@ -26,14 +26,24 @@ public class Category {
 
    /**
     * @brief Change the name of the Category
-    * 
+    *
     * @param[in] name
     *    The name to set
     */
    public void setName(String name) {
       this.name = name;
    }
-   
+
+   /**
+    * @brief Assign a question to the Category
+    *
+    * @param[in] question
+    *     The question to set
+    */
+   public void setQuestion(Question question) {
+       questions.add(question);
+   }
+
    /**
     * @brief Used by JsonBeans to serialize this class to JSON
     *
