@@ -1,100 +1,188 @@
+[
 {
-    "database":
-    [{
-        "Category": "Geography",
-        "Questions": [
-            { "question": "Buenos Aires is the capital of this country", 
-                "answer": "Argentina" },
-            { "question": "The name of this European country translates to 'Country of the Franks' in latin", 
-                "answer": "France" },
-            { "question": "Leonardo da Vinci was from this European country", 
-                "answer": "Italy" },
-            { "question": "The largest city in this Asian country is Ho Chi Minh city", 
-                "answer": "Vietnam"
-            },
-            { "question": "The motto of this African country is 'Harambee', or 'Let us all pull together'", 
-                "answer": "Kenya"
-            }
-        ]
-    },
-    {
-        "Category": "Sports",
-        "Questions": [
-            { "question": "one", 
-                "answer": "answer" },
-            { "question": "two", 
-                "answer": "answer" },
-            { "question": "three", 
-                "answer": "answer" },
-            { "question": "four", 
-                "answer": "answer" },
-            { "question": "five", 
-                "answer": "answer"
-            }
-        ]
-    },
-    {
-        "Category": "Potpourri",
-        "Questions": [
-            { "question": "one", 
-                "answer": "answer" },
-            { "question": "two", 
-                "answer": "answer" },
-            { "question": "three", 
-                "answer": "answer" },
-            { "question": "four", 
-                "answer": "answer" },
-            { "question": "five", 
-                "answer": "answer"
-            }
-        ]
-    },
-    {
-        "Category": "Animals",
-        "Questions": [
-            { "question": "one", 
-                "answer": "answer" },
-            { "question": "two", 
-                "answer": "answer" },
-            { "question": "three", 
-                "answer": "answer" },
-            { "question": "four", 
-                "answer": "answer" },
-            { "question": "five", 
-                "answer": "answer"
-            }
-        ]
-    },
-    {
-        "Category": "American History",
-        "Questions": [
-            { "question": "one", 
-                "answer": "answer" },
-            { "question": "two", 
-                "answer": "answer" },
-            { "question": "three", 
-                "answer": "answer" },
-            { "question": "four", 
-                "answer": "answer" },
-            { "question": "five", 
-                "answer": "answer"
-            }
-        ]
-    },
-    {
-        "Category": "Science",
-        "Questions": [
-            { "question": "one", 
-                "answer": "answer" },
-            { "question": "two", 
-                "answer": "answer" },
-            { "question": "three", 
-                "answer": "answer" },
-            { "question": "four", 
-                "answer": "answer" },
-            { "question": "five", 
-                "answer": "answer"
-            }
-        ]
-    }]
+	class: swmasters.woj.core.Category
+	name: Category 1
+	questions: [
+		{
+			question: question 1
+			answer: answer 1
+			pointValue: 100
+		}
+		{
+			question: question 2
+			answer: answer 2
+			pointValue: 200
+		}
+		{
+			question: question 3
+			answer: answer 3
+			pointValue: 300
+		}
+		{
+			question: question 4
+			answer: answer 4
+			pointValue: 400
+		}
+		{
+			question: question 5
+			answer: answer 5
+			pointValue: 500
+		}
+	]
 }
+{
+	class: swmasters.woj.core.Category
+	name: Category 2
+	questions: [
+		{
+			question: question 1
+			answer: answer 1
+			pointValue: 100
+		}
+		{
+			question: question 2
+			answer: answer 2
+			pointValue: 200
+		}
+		{
+			question: question 3
+			answer: answer 3
+			pointValue: 300
+		}
+		{
+			question: question 4
+			answer: answer 4
+			pointValue: 400
+		}
+		{
+			question: question 5
+			answer: answer 5
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Category 3
+	questions: [
+		{
+			question: question 1
+			answer: answer 1
+			pointValue: 100
+		}
+		{
+			question: question 2
+			answer: answer 2
+			pointValue: 200
+		}
+		{
+			question: question 3
+			answer: answer 3
+			pointValue: 300
+		}
+		{
+			question: question 4
+			answer: answer 4
+			pointValue: 400
+		}
+		{
+			question: question 5
+			answer: answer 5
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Category 4
+	questions: [
+		{
+			question: question 1
+			answer: answer 1
+			pointValue: 100
+		}
+		{
+			question: question 2
+			answer: answer 2
+			pointValue: 200
+		}
+		{
+			question: question 3
+			answer: answer 3
+			pointValue: 300
+		}
+		{
+			question: question 4
+			answer: answer 4
+			pointValue: 400
+		}
+		{
+			question: question 5
+			answer: answer 5
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Category 5
+	questions: [
+		{
+			question: question 1
+			answer: answer 1
+			pointValue: 100
+		}
+		{
+			question: question 2
+			answer: answer 2
+			pointValue: 200
+		}
+		{
+			question: question 3
+			answer: answer 3
+			pointValue: 300
+		}
+		{
+			question: question 4
+			answer: answer 4
+			pointValue: 400
+		}
+		{
+			question: question 5
+			answer: answer 5
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Category 6
+	questions: [
+		{
+			question: question 1
+			answer: answer 1
+			pointValue: 100
+		}
+		{
+			question: question 2
+			answer: answer 2
+			pointValue: 200
+		}
+		{
+			question: question 3
+			answer: answer 3
+			pointValue: 300
+		}
+		{
+			question: question 4
+			answer: answer 4
+			pointValue: 400
+		}
+		{
+			question: question 5
+			answer: answer 5
+			pointValue: 500
+		}
+	]
+}
+]

@@ -1,15 +1,11 @@
 package swmasters.woj.core;
 
 import java.util.ArrayList;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Iterator;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.Gdx;
 
 import swmasters.woj.ui.gameboard.questionboard.QuestionPanel;
 import swmasters.woj.ui.gameboard.wheel.Sector;
@@ -117,77 +113,14 @@ public class Game {
    }
 
    /**
-    * @brief Add category to categories arraylist
+    * @brief Import questions and categories from android/assets/questions.json
+    * to categories ArrayList
     *
-    * @param[in] category
-    *     The string of the category to set
-    *
-    * @param[in] questions
-    *     The arraylist of questions to assign to the category
     */
-   public void generateCategory(String category, ArrayList<Question> questions) {
+   public void generateQuestionsAndCategories() {
 
-       Category c = new Category();
-       c.setName(category);
-       categories.add(c);
-
-       for (Question q : questions) {
-           c.setQuestion(q);
-       }
-   }
-
-   /**
-    * @brief Select 5 questions for each of the 6 categories
-    * from the questions data files
-    */
-   public void generateQuestions() {
-
-      try {
-
-          JSONParser parser = new JSONParser();
-
-          // Search for all files in questions directory or combine all
-          Object obj = (JSONObject) parser.parse(new FileReader(
-                  "../../assets/data/questions/questions.json"));
-
-          // Read question database as json object
-          JSONObject jsonObject = (JSONObject) obj;
-          JSONArray categoryList = (JSONArray) jsonObject.get("database");
-
-          // Read categories from database
-          Iterator<JSONObject> c_iterator = categoryList.iterator();
-          while (c_iterator.hasNext()) {
-              JSONObject cat = c_iterator.next();
-              String category = (String) cat.get("Category");
-
-              // Read questions from category
-              JSONArray questionList = (JSONArray) cat.get("Questions");
-              Iterator<JSONObject> q_iterator = questionList.iterator();
-              ArrayList<Question> questions = new ArrayList<Question>();
-              while (q_iterator.hasNext()) {
-                  JSONObject qa = q_iterator.next();
-                  String question = (String) qa.get("question");
-                  String answer = (String) qa.get("answer");
-
-                  // Create new question instance with zero point value
-                  Question q = new Question(question, answer, 0, false);
-
-                  // Add question to question list
-                  questions.add(q);
-              }
-
-              // Generate the new category with questions
-              generateCategory(category, questions);
-
-          }
-
-      } catch (FileNotFoundException e) {
-          e.printStackTrace();
-      } catch (IOException e) {
-          e.printStackTrace();
-      } catch (ParseException e) {
-          e.printStackTrace();
-      }
+       Json json = new Json();
+       categories = json.fromJson(ArrayList.class,Gdx.files.local("../../assets/data/questions/questions.json"));
    }
 
    /**
@@ -230,7 +163,7 @@ public class Game {
     *    second player
     */
    private void initGame(Player player1, Player player2) {
-      generateQuestions();
+      generateQuestionsAndCategories();
       this.theWheel = new Wheel(this.categories);
      this.players = new ArrayList<Player>();
      this.players.add(player1);
