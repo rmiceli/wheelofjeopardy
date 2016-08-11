@@ -1,5 +1,3 @@
-#version 120
-
 varying vec4 v_color;
 varying vec2 v_texCoord0;
 

@@ -57,19 +57,27 @@ public class WoJGame extends ApplicationAdapter {
    private QuestionBoard questionBoard;
    private Window window;
    private GameBoard gameBoard;
+   private FitViewport viewport;
 
    /**
     * @brief Create and set game stage
     */
    @Override
    public void create () {
+	   /*
       stage = new Stage(new FitViewport(1920, 1080));
       Gdx.input.setInputProcessor(stage);
+      */
+	   camera = new OrthographicCamera();
+	   viewport = new FitViewport(1920, 1080, camera);
       Player player1 = new Player("Alice");
       Player player2 = new Player("Bob");
       gameBoard = new GameBoard(new Game(player1, player2));
       gameBoard.setFillParent(true);
-      stage.addActor(gameBoard);
+      gameBoard.setX(0);
+      gameBoard.setY(0);
+      gameBoard.setColor(Color.RED);
+      //stage.addActor(gameBoard);
    }
 
    /**
@@ -77,9 +85,15 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
    public void render () {
+	  camera.update();
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      stage.act(Gdx.graphics.getDeltaTime());
-      stage.draw();
+      SpriteBatch batch = new SpriteBatch();
+      batch.begin();
+      gameBoard.draw(batch, 1);
+      batch.end();
+      
+      //stage.act(Gdx.graphics.getDeltaTime());
+      //stage.draw();
    }
    
    /**
@@ -87,7 +101,8 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
     public void resize(int width, int height) {
-      stage.getViewport().update(width,  height, true);
+      //stage.getViewport().update(width,  height, true);
+	   viewport.update(width, height);
     }
    
    /**
@@ -95,6 +110,6 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
    public void dispose () {
-      stage.dispose();
+      //stage.dispose();
    }
 }
