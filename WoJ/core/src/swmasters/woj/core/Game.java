@@ -45,7 +45,7 @@ public class Game {
    private void onSpinCategory(Category currentCategory) {
       /** TODO handle category spin */
 	   Question currentQuestion = currentCategory.getNextQuestion();
-	   
+
 	   // Must display question panel
 	   // Create a new dialog with question text, textbox, and submit button
 	   //QuestionPanel questionPanel = new QuestionPanel(currentQuestion.getQuestion());
@@ -83,11 +83,11 @@ public class Game {
       /** TODO launch category choice dialog with getNextPlayer() selected */
 	   int previousPlayer = currentPlayer;
 	   currentPlayer = getNextPlayer();
-	   
+
 	   // Next player chooses category for the current player
 	   // Must display choices and retrieve their chosen category
 	   Category chosenCategory = new Category();
-	   
+
 	   // Return control to current player and go to category spin event
 	   currentPlayer = previousPlayer;
 	   onSpinCategory(chosenCategory);
@@ -99,11 +99,11 @@ public class Game {
    private void onSpinPlayersChoice() {
       /** TODO handle player's choice spin */
       /** TODO launch category choice dialog with currentPlayer selected */
-	   
+
 	   // Current player chooses their category
 	   // Must display choices and retrieve their chosen category
 	   Category chosenCategory = new Category();
-	   
+
 	   // Go to category spin event
 	   onSpinCategory(chosenCategory);
    }
@@ -127,7 +127,6 @@ public class Game {
     */
    public void generateCategory(String category, ArrayList<Question> questions) {
 
-       System.out.println(category);
        Category c = new Category();
        c.setName(category);
        categories.add(c);
