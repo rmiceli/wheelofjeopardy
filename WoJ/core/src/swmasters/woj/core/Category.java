@@ -7,8 +7,8 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public class Category {
    private String name;                      /**< name of category */
-   private ArrayList<Question> questions;    /**< list of questions selected for this category */
-      
+   private ArrayList<Question> questions = new ArrayList<Question>();    /**< list of questions selected for this category */
+
    /**
     * @brief Construct a Category
     */
@@ -43,7 +43,7 @@ public class Category {
    public void write(Json json) {
       json.writeValue(name);
    }
-   
+
    /**
     * @brief Used by JsonBeans to serialize this class from JSON
     *

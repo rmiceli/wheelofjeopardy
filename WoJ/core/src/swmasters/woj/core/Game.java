@@ -20,7 +20,7 @@ public class Game {
    private int currentPlayer;               /**< player who has control of the board */
    private ArrayList<Player> players;       /**< list of players */
    private Wheel theWheel;                  /**< the wheel object */
-   private ArrayList<Category> categories;  /**< the list of categories in this round */
+   private ArrayList<Category> categories = new ArrayList<Category>();  /**< the list of categories in this round */
 
    /**
     * @brief returns the next player in the list
