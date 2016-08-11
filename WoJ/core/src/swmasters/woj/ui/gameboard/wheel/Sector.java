@@ -211,7 +211,7 @@ public class Sector extends Widget {
 			
 		polySprite = new PolygonSprite(polyRegion);
 		polySprite.setOrigin(94, 0);
-		polySprite.setSize(64, 384);
+		polySprite.setSize(128, 768);
 		polyBatch = new PolygonSpriteBatch();
 		polySprite.rotate(polyAngle);
 	}
@@ -358,7 +358,10 @@ public class Sector extends Widget {
 	    //texture.bind();*/
 		
 		
-		polyBatch.begin();		
+		polyBatch.begin();
+		polyBatch.setProjectionMatrix(this.camera.projection);
+		polySprite.setBounds(0, 0, this.getWidth(), this.getHeight());
+		polySprite.setSize(32, 192);
 		polySprite.draw(polyBatch);
 		polyBatch.end();
 		
@@ -379,8 +382,5 @@ public class Sector extends Widget {
 	    //drawTriangle(10, 10, 40, 40, Color.RED);
 	    //flush();
 	    //shader.end();
-	    
-	    
-	    
-	}	
+	}
 }

@@ -18,6 +18,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeType.GlyphSlot;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeType.Library;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -45,41 +47,39 @@ public class WoJGame extends ApplicationAdapter {
    /* constants */
    static final int WORLD_WIDTH = 1920;
    static final int WORLD_HEIGHT = 1080;
-   static final float worldGridWidth = 1920;
-   static final float worldGridHeight = 1080;
 
-   private SpriteBatch batch;
-   private Sprite backgroundSprite;
-   private OrthographicCamera camera;
-   private BitmapFont fontTitle;
-   private BitmapFont fontMenuItem;
-   private FreeTypeFontGenerator generator;
-   private FreeTypeFontParameter parameter;
+   //private SpriteBatch batch;
+   //private Sprite backgroundSprite;
+   //private OrthographicCamera camera;
+   //private BitmapFont fontTitle;
+   //private BitmapFont fontMenuItem;
+   //private FreeTypeFontGenerator generator;
+   //private FreeTypeFontParameter parameter;
    private Stage stage;
-   private QuestionBoard questionBoard;
-   private Window window;
+   //private QuestionBoard questionBoard;
+   //private Window window;
    private GameBoard gameBoard;
-   private FitViewport viewport;
+   //private FitViewport viewport;
 
    /**
     * @brief Create and set game stage
     */
    @Override
    public void create () {
-	   /*
-      stage = new Stage(new FitViewport(1920, 1080));
+      stage = new Stage(new FitViewport(WORLD_WIDTH, WORLD_HEIGHT));
       Gdx.input.setInputProcessor(stage);
-      */
-	   camera = new OrthographicCamera();
-	   viewport = new FitViewport(800, 600, camera);
       Player player1 = new Player("Alice");
       Player player2 = new Player("Bob");
       gameBoard = new GameBoard(new Game(player1, player2));
       gameBoard.setFillParent(true);
+      gameBoard.setSize(stage.getWidth(), stage.getHeight());
+      gameBoard.setBounds(0, 0, stage.getWidth(), stage.getHeight());
+      gameBoard.setColor(Color.BLUE);
       gameBoard.setX(0);
       gameBoard.setY(0);
-      gameBoard.setColor(Color.RED);
-      //stage.addActor(gameBoard);
+      //gameBoard.setBounds(0, 0, WORLD_WIDTH - 25, WORLD_HEIGHT - 25);
+      gameBoard.setSize(stage.getWidth(), stage.getHeight());
+      stage.addActor(gameBoard);
    }
 
    /**
@@ -87,16 +87,22 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
    public void render () {
-	  camera.update();
-	  Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
+	  Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      SpriteBatch batch = new SpriteBatch();
-      batch.begin();
-      gameBoard.draw(batch, 1);
-      batch.end();
-      
-      //stage.act(Gdx.graphics.getDeltaTime());
-      //stage.draw();
+      stage.act(Gdx.graphics.getDeltaTime());
+      stage.draw();
+
+      /*
+      ShapeRenderer shapeRenderer;
+      shapeRenderer = new ShapeRenderer();
+      shapeRenderer.setAutoShapeType(true);
+	  shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().projection);
+      //shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+	  shapeRenderer.begin(ShapeType.Filled);
+	  shapeRenderer.setColor(Color.CYAN);
+	  shapeRenderer.circle(0, 0, 10);
+	  shapeRenderer.end();
+	  */
    }
    
    /**
@@ -104,14 +110,7 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
     public void resize(int width, int height) {
-	   Vector2 size = Scaling.fit.apply(800, 600, width, height);
-	   int viewportX = (int)(width - size.x) / 2;
-	   int viewportY = (int)(height - size.y) / 2;
-	   int viewportWidth = (int)size.x;
-	   int viewportHeight = (int)size.y;
-	   Gdx.gl.glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
-	   viewport.update(viewportWidth, viewportHeight);
-      //stage.getViewport().update(width,  height, true);
+       stage.getViewport().update(width, height, true);
     }
    
    /**
@@ -119,6 +118,6 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
    public void dispose () {
-      //stage.dispose();
+      stage.dispose();
    }
 }

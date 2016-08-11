@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
 import swmasters.woj.core.Category;
@@ -16,18 +17,19 @@ import swmasters.woj.ui.gameboard.wheel.Sector.SectorType;
 
 public class Wheel extends WidgetGroup {
 
-	private ShapeRenderer renderer = new ShapeRenderer();
+	private ShapeRenderer renderer;
 	private final int MAX_SECTORS = 12;
 	private final int MAX_CATEGORY_SECTORS = 6;
 	private ArrayList<Sector> sectors;
 	private Random randomGenerator = new Random();
 	private int currentSectorIndex = 0;
 	private Sector sector;
+	private final int centerRadius = 50;
 	
 	private void initSectors() {
 		sector = new Sector(SectorType.SECTOR_TYPE_BANKRUPT);
-		sector.setX(100);
-		sector.setY(100);
+		sector.setX(centerRadius / 2);
+		sector.setY(centerRadius / 2);
 	}
 	
 	private void loadSectors(ArrayList<Category> categories) {
@@ -64,21 +66,23 @@ public class Wheel extends WidgetGroup {
 	public Wheel(ArrayList<Category> categories) {
 		loadSectors(categories);
 		initSectors();
+		renderer = new ShapeRenderer();
 	}
 	
 	public void draw(Batch batch, float parentAlpha) {
 		batch.end();
-		
-		renderer.setProjectionMatrix(batch.getProjectionMatrix());
-		renderer.setTransformMatrix(batch.getTransformMatrix());
-		renderer.translate(getX(), getY(), 0);
-		
+		//this.getStage().getViewport();
+		/*
+		renderer.setProjectionMatrix(this.getStage().getViewport().getCamera().projection);	
 		renderer.begin(ShapeType.Filled);
 		renderer.setColor(Color.GREEN);
-		renderer.circle(0, 0, 50);
+		renderer.circle(0, 0, 75);
 		renderer.end();
+		*/
 		
 		batch.begin();
+		//batch.draw(sector, 0, 0, 100, 100);
+		sector.setBounds(0, 0, this.getWidth(), this.getHeight());
 		sector.draw(batch, 1);
 	}
 }
