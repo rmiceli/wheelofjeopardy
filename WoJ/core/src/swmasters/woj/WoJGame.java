@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeType.Library;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -26,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -69,7 +71,7 @@ public class WoJGame extends ApplicationAdapter {
       Gdx.input.setInputProcessor(stage);
       */
 	   camera = new OrthographicCamera();
-	   viewport = new FitViewport(1920, 1080, camera);
+	   viewport = new FitViewport(800, 600, camera);
       Player player1 = new Player("Alice");
       Player player2 = new Player("Bob");
       gameBoard = new GameBoard(new Game(player1, player2));
@@ -86,6 +88,7 @@ public class WoJGame extends ApplicationAdapter {
    @Override
    public void render () {
 	  camera.update();
+	  Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
       SpriteBatch batch = new SpriteBatch();
       batch.begin();
@@ -101,8 +104,14 @@ public class WoJGame extends ApplicationAdapter {
     */
    @Override
     public void resize(int width, int height) {
+	   Vector2 size = Scaling.fit.apply(800, 600, width, height);
+	   int viewportX = (int)(width - size.x) / 2;
+	   int viewportY = (int)(height - size.y) / 2;
+	   int viewportWidth = (int)size.x;
+	   int viewportHeight = (int)size.y;
+	   Gdx.gl.glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
+	   viewport.update(viewportWidth, viewportHeight);
       //stage.getViewport().update(width,  height, true);
-	   viewport.update(width, height);
     }
    
    /**

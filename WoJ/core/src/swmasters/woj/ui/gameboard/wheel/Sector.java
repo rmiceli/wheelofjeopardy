@@ -15,12 +15,14 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.PolygonRegion;
 import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -87,6 +89,12 @@ public class Sector extends Widget {
 	private Category category;    /**< Category for this sector (only valid for
                                       (SectorType == SECTOR_TYPE_CATEGORY)
                                       instances */
+	
+	private TextureRegion textureRegion;
+	private PolygonRegion polyRegion;
+	private PolygonSprite polySprite;
+	private PolygonSpriteBatch polyBatch;
+	private float polyAngle = -45f;
 	
 	void flush() {
 	    //if we've already flushed
@@ -183,7 +191,29 @@ public class Sector extends Widget {
 	
 	private void initTexture() {
 		// Setup texture
-	      texture = new Texture("assets/graphics/wheel/bankrupt.png");
+	    texture = new Texture("assets/graphics/wheel/bankrupt.png");
+	    texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		textureRegion = new TextureRegion(texture);
+	}
+	
+	private void initSprite() {
+		polyRegion = new PolygonRegion(textureRegion,
+				new float[] {
+						30, 0,
+						158, 0,
+						168, 768,
+						10, 768
+				},
+				new short[] {
+						0, 1, 2,
+						0, 2, 3
+				});
+			
+		polySprite = new PolygonSprite(polyRegion);
+		polySprite.setOrigin(94, 0);
+		polySprite.setSize(64, 384);
+		polyBatch = new PolygonSpriteBatch();
+		polySprite.rotate(polyAngle);
 	}
 	
    private void initSector() {
@@ -225,6 +255,7 @@ public class Sector extends Widget {
     initShader();
       
       initTexture();
+      initSprite();
       
    }
 
@@ -240,6 +271,7 @@ public class Sector extends Widget {
 		initMesh();
 	    initShader();
 	    initTexture();
+	    initSprite();
 		//initSector();
 	}
 	
@@ -256,6 +288,7 @@ public class Sector extends Widget {
 		initMesh();
 		initShader();
 		initTexture();
+		initSprite();
       //initSector();
 	}
 
@@ -323,26 +356,12 @@ public class Sector extends Widget {
 		shader.setUniformMatrix("u_projTrans", batch.getProjectionMatrix());
 		shader.end();
 	    //texture.bind();*/
-		PolygonRegion polyRegion = new PolygonRegion(new TextureRegion(texture),
-				new float[] {
-						0, 0,
-						1000, 0,
-						1000, 1000,
-						0, 1000
-				},
-				new short[] {
-						0, 1, 2,
-						0, 2, 3
-				});
-				
-			
-		PolygonSprite poly = new PolygonSprite(polyRegion);
-		poly.setOrigin(0, 0);
-		PolygonSpriteBatch polyBatch = new PolygonSpriteBatch();
-
-		polyBatch.begin();
-		poly.draw(polyBatch);
+		
+		
+		polyBatch.begin();		
+		polySprite.draw(polyBatch);
 		polyBatch.end();
+		
 		//shader.end();
 	    
 	    batch.begin();
@@ -357,8 +376,8 @@ public class Sector extends Widget {
 	    //shader.begin();
 	    //shader.setUniformMatrix("u_projModelView", batch.getProjectionMatrix());
 	    //mesh.render(shader, GL20.GL_TRIANGLES);
-	    drawTriangle(10, 10, 40, 40, Color.RED);
-	    flush();
+	    //drawTriangle(10, 10, 40, 40, Color.RED);
+	    //flush();
 	    //shader.end();
 	    
 	    

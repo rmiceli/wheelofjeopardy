@@ -18,21 +18,19 @@ public class GameBoard extends WidgetGroup {
 	private Game game;
 	private Wheel wheel;
 	
-	public GameBoard(Game game) {
-		this.game = game;
-	}
-	
-	public void draw(Batch batch, float parentAlpha) {
-
-		/*ArrayList<Category> categories = new ArrayList<Category>();
+	private void initWheel() {
+		ArrayList<Category> categories = new ArrayList<Category>();
 		wheel = new Wheel(categories);
 		wheel.setX(400);
 		wheel.setY(400);
-		wheel.draw(batch, parentAlpha);*/
-			
-		Sector sector = new Sector(SectorType.SECTOR_TYPE_BANKRUPT);
-		sector.setX(100);
-		sector.setY(100);
-		sector.draw(batch, 1);
+	}
+	
+	public GameBoard(Game game) {
+		this.game = game;
+		initWheel();
+	}
+	
+	public void draw(Batch batch, float parentAlpha) {
+		wheel.draw(batch, parentAlpha);
 	}
 }

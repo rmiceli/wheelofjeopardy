@@ -24,6 +24,12 @@ public class Wheel extends WidgetGroup {
 	private int currentSectorIndex = 0;
 	private Sector sector;
 	
+	private void initSectors() {
+		sector = new Sector(SectorType.SECTOR_TYPE_BANKRUPT);
+		sector.setX(100);
+		sector.setY(100);
+	}
+	
 	private void loadSectors(ArrayList<Category> categories) {
 		sectors = new ArrayList<Sector>();
 		
@@ -57,14 +63,10 @@ public class Wheel extends WidgetGroup {
 	
 	public Wheel(ArrayList<Category> categories) {
 		loadSectors(categories);
+		initSectors();
 	}
 	
 	public void draw(Batch batch, float parentAlpha) {
-		sector = new Sector(SectorType.SECTOR_TYPE_BANKRUPT);
-		sector.setX(100);
-		sector.setY(100);
-		sector.draw(batch, 1);
-		
 		batch.end();
 		
 		renderer.setProjectionMatrix(batch.getProjectionMatrix());
@@ -73,9 +75,10 @@ public class Wheel extends WidgetGroup {
 		
 		renderer.begin(ShapeType.Filled);
 		renderer.setColor(Color.GREEN);
-		renderer.circle(100, 100, 100);
+		renderer.circle(0, 0, 50);
 		renderer.end();
 		
 		batch.begin();
+		sector.draw(batch, 1);
 	}
 }
