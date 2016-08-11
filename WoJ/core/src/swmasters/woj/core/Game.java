@@ -85,12 +85,24 @@ public class Game {
    }
 
    /**
-    * @brief Select 6 categories from the data file
+    * @brief Add category to categories arraylist
+    *
+    * @param[in] category
+    *     The string of the category to set
+    *
+    * @param[in] questions
+    *     The arraylist of questions to assign to the category
     */
-   public void generateCategories() {
-      categories = new ArrayList<Category>();
-      /** TODO read in categories from file and
-       *  randomly pick 6 of them for this game */
+   public void generateCategory(String category, ArrayList<Question> questions) {
+
+       System.out.println(category);
+       Category c = new Category();
+       c.setName(category);
+       categories.add(c);
+
+       for (Question q : questions) {
+           c.setQuestion(q);
+       }
    }
 
    /**
@@ -99,47 +111,52 @@ public class Game {
     */
    public void generateQuestions() {
 
-        try {
+      try {
 
-            JSONParser parser = new JSONParser();
+          JSONParser parser = new JSONParser();
 
-            // Search for all files in questions directory or combine all
-            Object obj = (JSONObject) parser.parse(new FileReader(
-                    "../../assets/data/questions/questions.json"));
+          // Search for all files in questions directory or combine all
+          Object obj = (JSONObject) parser.parse(new FileReader(
+                  "../../assets/data/questions/questions.json"));
 
-            // Read question database as json object
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONArray categoryList = (JSONArray) jsonObject.get("database");
+          // Read question database as json object
+          JSONObject jsonObject = (JSONObject) obj;
+          JSONArray categoryList = (JSONArray) jsonObject.get("database");
 
-            // Read categories from database
-            Iterator<JSONObject> c_iterator = categoryList.iterator();
-            while (c_iterator.hasNext()) {
-                JSONObject cat = c_iterator.next();
-                String category = (String) cat.get("Category");
+          // Read categories from database
+          Iterator<JSONObject> c_iterator = categoryList.iterator();
+          while (c_iterator.hasNext()) {
+              JSONObject cat = c_iterator.next();
+              String category = (String) cat.get("Category");
 
-                // TODO create new category instance
-                // new Category setCategoryName;
+              // Read questions from category
+              JSONArray questionList = (JSONArray) cat.get("Questions");
+              Iterator<JSONObject> q_iterator = questionList.iterator();
+              ArrayList<Question> questions = new ArrayList<Question>();
+              while (q_iterator.hasNext()) {
+                  JSONObject qa = q_iterator.next();
+                  String question = (String) qa.get("question");
+                  String answer = (String) qa.get("answer");
 
-                // Read questions from category
-                JSONArray questionList = (JSONArray) cat.get("Questions");
-                Iterator<JSONObject> q_iterator = questionList.iterator();
-                while (q_iterator.hasNext()) {
-                    JSONObject qa = q_iterator.next();
-                    String question = (String) qa.get("question");
-                    String answer = (String) qa.get("answer");
+                  // Create new question instance with zero point value
+                  Question q = new Question(question, answer, 0, false);
 
-                    // TODO create new question instance
-                    // new Question setQuestion, setAnswer;
-                }
-            }
+                  // Add question to question list
+                  questions.add(q);
+              }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+              // Generate the new category with questions
+              generateCategory(category, questions);
+
+          }
+
+      } catch (FileNotFoundException e) {
+          e.printStackTrace();
+      } catch (IOException e) {
+          e.printStackTrace();
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
    }
 
    /**
@@ -182,7 +199,6 @@ public class Game {
     *    second player
     */
    private void initGame(Player player1, Player player2) {
-      generateCategories();
       generateQuestions();
       this.theWheel = new Wheel(this.categories);
      this.players = new ArrayList<Player>();
