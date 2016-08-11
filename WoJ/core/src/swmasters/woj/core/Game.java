@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import swmasters.woj.ui.gameboard.questionboard.QuestionBoardTile;
+import swmasters.woj.ui.gameboard.questionboard.QuestionPanel;
 import swmasters.woj.ui.gameboard.wheel.Sector;
 import swmasters.woj.ui.gameboard.wheel.Wheel;
 
@@ -46,7 +46,12 @@ public class Game {
       /** TODO handle category spin */
 	   Question currentQuestion = currentCategory.getNextQuestion();
 	   
-	// Must display question panel
+	   // Must display question panel
+	   // Create a new dialog with question text, textbox, and submit button
+	   //QuestionPanel questionPanel = new QuestionPanel(currentQuestion.getQuestion());
+	   QuestionPanel questionPanel = new QuestionPanel(currentQuestion);
+	   // How to get WoJ stage variable here as input?
+	   //questionPanel.show(stage);
    }
 
    /**
