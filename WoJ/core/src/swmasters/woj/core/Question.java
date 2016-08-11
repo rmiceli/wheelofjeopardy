@@ -112,9 +112,16 @@ public class Question {
     this.question = question;
   }
 
-
+   /**
+    * @brief Verifies whether the passed answer is correct
+    *
+    * @return correct
+    *    The boolean value for whether the answer was correct
+    */
   public boolean verifyAnswer(String stringToVerify) {
-    /* Needs to be written */
+    if(stringToVerify.equals(this.answer)) {
+      return true;
+    }
     return false;
   }
 
