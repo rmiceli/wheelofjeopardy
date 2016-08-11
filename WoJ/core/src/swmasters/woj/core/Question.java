@@ -5,7 +5,7 @@ public class Question {
   private String answer;   /**< The text of the answer to the question */
   private Integer pointValue; /**< The integer value of the points for the question */
   private boolean answered; /**< The boolean for whether the question has been answered or not */
-  
+
    /**
     * @brief Construct a Question
     */
@@ -91,14 +91,14 @@ public class Question {
   public void setAnswered(boolean answered) {
     this.answered = answered;
   }
-  
+
    /**
     * @brief Set the question point value
     *
     * @param[in] answer
     *    The integer of a question's point value
     */
-  public void setPointValue(Integer) pointValue) {
+  public void setPointValue(Integer pointValue) {
     this.pointValue = pointValue;
   }
 

@@ -35,6 +35,14 @@ public class Category {
    }
 
    /**
+    * @brief get category name
+    * @param[out] category name
+    */
+   public String getName() {
+      return name;
+   }
+
+   /**
     * @brief Assign a question to the Category
     *
     * @param[in] question
@@ -65,10 +73,10 @@ public class Category {
    public void read(Json json, JsonValue jsonMap) {
       name = jsonMap.child().name();
    }
-   
+
    /**
     * @brief Get the next unanswered question from this category
-    * 
+    *
     * @returns current question
     */
    public Question getNextQuestion(){
