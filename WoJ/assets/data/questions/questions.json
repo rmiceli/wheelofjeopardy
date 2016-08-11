@@ -1,0 +1,100 @@
+{
+    "database":
+    [{
+        "Category": "Geography",
+        "Questions": [
+            { "question": "Buenos Aires is the capital of this country", 
+                "answer": "Argentina" },
+            { "question": "The name of this European country translates to 'Country of the Franks' in latin", 
+                "answer": "France" },
+            { "question": "Leonardo da Vinci was from this European country", 
+                "answer": "Italy" },
+            { "question": "The largest city in this Asian country is Ho Chi Minh city", 
+                "answer": "Vietnam"
+            },
+            { "question": "The motto of this African country is 'Harambee', or 'Let us all pull together'", 
+                "answer": "Kenya"
+            }
+        ]
+    },
+    {
+        "Category": "Sports",
+        "Questions": [
+            { "question": "one", 
+                "answer": "answer" },
+            { "question": "two", 
+                "answer": "answer" },
+            { "question": "three", 
+                "answer": "answer" },
+            { "question": "four", 
+                "answer": "answer" },
+            { "question": "five", 
+                "answer": "answer"
+            }
+        ]
+    },
+    {
+        "Category": "Potpourri",
+        "Questions": [
+            { "question": "one", 
+                "answer": "answer" },
+            { "question": "two", 
+                "answer": "answer" },
+            { "question": "three", 
+                "answer": "answer" },
+            { "question": "four", 
+                "answer": "answer" },
+            { "question": "five", 
+                "answer": "answer"
+            }
+        ]
+    },
+    {
+        "Category": "Animals",
+        "Questions": [
+            { "question": "one", 
+                "answer": "answer" },
+            { "question": "two", 
+                "answer": "answer" },
+            { "question": "three", 
+                "answer": "answer" },
+            { "question": "four", 
+                "answer": "answer" },
+            { "question": "five", 
+                "answer": "answer"
+            }
+        ]
+    },
+    {
+        "Category": "American History",
+        "Questions": [
+            { "question": "one", 
+                "answer": "answer" },
+            { "question": "two", 
+                "answer": "answer" },
+            { "question": "three", 
+                "answer": "answer" },
+            { "question": "four", 
+                "answer": "answer" },
+            { "question": "five", 
+                "answer": "answer"
+            }
+        ]
+    },
+    {
+        "Category": "Science",
+        "Questions": [
+            { "question": "one", 
+                "answer": "answer" },
+            { "question": "two", 
+                "answer": "answer" },
+            { "question": "three", 
+                "answer": "answer" },
+            { "question": "four", 
+                "answer": "answer" },
+            { "question": "five", 
+                "answer": "answer"
+            }
+        ]
+    }]
+}
