@@ -80,4 +80,13 @@ public class Player {
    public String getPlayerName() {
       return this.name;
    }
+   
+    /**
+    * @brief Return player's free turn count
+    *
+    * @returns player's free turn count
+    */
+   public int getfreeTurnCount(){
+	   return freeTurnCount;
+   }
 }
