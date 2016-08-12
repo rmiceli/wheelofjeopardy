@@ -39,11 +39,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 
 import swmasters.woj.core.Category;
 
-public class Sector extends Widget {
-
-   private OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-   
-   private final Model model = new Model();
+public class Sector extends Sprite {   
    private ShaderProgram shader;
   
    private static final Matrix4 modelView = new Matrix4();
@@ -114,14 +110,11 @@ public class Sector extends Widget {
 	    //number of vertices we need to render
 	    int vertexCount = (idx/NUM_COMPONENTS);
 
-	    //update the camera with our Y-up coordiantes
-	    camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
 	    //start the shader before setting any uniforms
 	    shader.begin();
 
 	    //update the projection matrix so our triangles are rendered in 2D
-	    shader.setUniformMatrix("u_projTrans", camera.combined);
+	    //shader.setUniformMatrix("u_projTrans", Gdx.app.camera.combined);
 
 	    //render the mesh
 	    mesh.render(shader, GL20.GL_TRIANGLES, 0, vertexCount);
@@ -133,42 +126,7 @@ public class Sector extends Widget {
 
 	    //reset index to zero
 	    idx = 0;
-	}
-	
-	void drawTriangle(float x, float y, float width, float height, Color color) {
-	    //we don't want to hit any index out of bounds exception...
-	    //so we need to flush the batch if we can't store any more verts
-	    if (idx==verts.length)
-	        flush();
-
-	    //now we push the vertex data into our array
-	    //we are assuming (0, 0) is lower left, and Y is up
-
-	    //bottom left vertex
-	    verts[idx++] = x;           //Position(x, y) 
-	    verts[idx++] = y;
-	    verts[idx++] = color.r;     //Color(r, g, b, a)
-	    verts[idx++] = color.g;
-	    verts[idx++] = color.b;
-	    verts[idx++] = color.a;
-
-	    //top left vertex
-	    verts[idx++] = x;           //Position(x, y) 
-	    verts[idx++] = y + height;
-	    verts[idx++] = color.r;     //Color(r, g, b, a)
-	    verts[idx++] = color.g;
-	    verts[idx++] = color.b;
-	    verts[idx++] = color.a;
-
-	    //bottom right vertex
-	    verts[idx++] = x + width;    //Position(x, y) 
-	    verts[idx++] = y;
-	    verts[idx++] = color.r;      //Color(r, g, b, a)
-	    verts[idx++] = color.g;
-	    verts[idx++] = color.b;
-	    verts[idx++] = color.a;
-	}
-	
+	}	
 	
 	private void initMesh() {
 	    mesh = new Mesh(true, MAX_VERTS, 0, 
@@ -191,7 +149,23 @@ public class Sector extends Widget {
 	
 	private void initTexture() {
 		// Setup texture
-	    texture = new Texture("assets/graphics/wheel/bankrupt.png");
+		String texturePath = "assets/graphics/wheel/";
+		String textureFilename;
+		
+		switch (this.type) {
+		case SECTOR_TYPE_BANKRUPT:
+			textureFilename = "bankrupt.png";
+			break;
+		case SECTOR_TYPE_LOSE_TURN:
+			textureFilename = "loseaturn.png";
+			break;		
+		default:
+			textureFilename = "nothingyet.png";
+			System.out.println(this.type.toString());
+			break;
+		};
+		
+	    texture = new Texture(texturePath + textureFilename);
 	    texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		textureRegion = new TextureRegion(texture);
 	}
@@ -213,29 +187,9 @@ public class Sector extends Widget {
 		polySprite.setOrigin(94, 0);
 		polySprite.setSize(128, 768);
 		polyBatch = new PolygonSpriteBatch();
-		polySprite.rotate(polyAngle);
 	}
 	
    private void initSector() {
-	   
-	  // Setup bounding box
-	  BoundingBox boundingBox = new BoundingBox();
-	  model.calculateBoundingBox(boundingBox);
-	  Vector3 center = new Vector3();
-	  center = boundingBox.getCenter(center);
-		
-	  // Setup camera
-	  camera.position.set(boundingBox.max.x, boundingBox.max.y, boundingBox.max.z).mul(
-          new Matrix3(new float[] {
-			   2, 0, 0,
-			   0, 2, 0,
-			   0, 0, 2 }));
-	  camera.lookAt(center.x, center.y, center.z);
-	  camera.up.set(0, 0, 1);
-	  camera.normalizeUp();
-	  camera.near = 1f;
-	  camera.far = new Vector3(camera.position).dst2(center) * 2f;
-	  camera.update();
 
 	  // Create mesh
       mesh = new Mesh(true, 4, 4,
@@ -250,7 +204,6 @@ public class Sector extends Widget {
     		  100f, 0f, 0 });
       
       mesh.setIndices(new short[] { 0, 1, 2, 3 });
-      model.meshes.add(mesh);
       
     initShader();
       
@@ -323,7 +276,7 @@ public class Sector extends Widget {
     *    
     */
 	public void draw(Batch batch, float parentAlpha) {
-		batch.end();
+		//batch.end();
 		
 		
 		/*
@@ -359,15 +312,16 @@ public class Sector extends Widget {
 		
 		
 		polyBatch.begin();
-		polyBatch.setProjectionMatrix(this.camera.projection);
+		//polyBatch.setProjectionMatrix();
 		polySprite.setBounds(0, 0, this.getWidth(), this.getHeight());
 		polySprite.setSize(32, 192);
+		//polySprite.rotate(this.getRotation());
 		polySprite.draw(polyBatch);
 		polyBatch.end();
 		
 		//shader.end();
 	    
-	    batch.begin();
+	    //batch.begin();
 	    
 	  //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	    //Gdx.gl.glEnable(GL20.GL_TEXTURE_2D);
