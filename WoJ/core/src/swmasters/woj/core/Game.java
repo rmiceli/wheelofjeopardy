@@ -142,7 +142,7 @@ public class Game {
    public void generateQuestionsAndCategories() {
 
        Json json = new Json();
-       categories = json.fromJson(ArrayList.class,Gdx.files.local("../../assets/data/questions/questions.json"));
+       categories = json.fromJson(ArrayList.class, Gdx.files.internal("assets/data/questions/questions.json"));
    }
 
    /**
