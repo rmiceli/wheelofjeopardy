@@ -1,186 +1,372 @@
 [
 {
 	class: swmasters.woj.core.Category
-	name: Category 1
+	name: World Geography
 	questions: [
 		{
-			question: question 1
-			answer: answer 1
+			question: Buenos Aires is the capital of this country
+			answer: Argentina
 			pointValue: 100
 		}
 		{
-			question: question 2
-			answer: answer 2
+			question: The name of this European country translates to 'Country of the Franks' in latin
+			answer: France
 			pointValue: 200
 		}
 		{
-			question: question 3
-			answer: answer 3
+			question: Leonardo da Vinci was from this European country
+			answer: Italy
 			pointValue: 300
 		}
 		{
-			question: question 4
-			answer: answer 4
+			question: The largest city in this Asian country is Ho Chi Minh city
+			answer: Vietnam
 			pointValue: 400
 		}
 		{
-			question: question 5
-			answer: answer 5
+			question: The motto of this African country is 'Harambee' or 'Let us all pull together'
+			answer: Kenya
 			pointValue: 500
 		}
 	]
 }
 {
 	class: swmasters.woj.core.Category
-	name: Category 2
+	name: Sports
 	questions: [
 		{
-			question: question 1
-			answer: answer 1
+			question: This person invented basketball
+			answer: James Naismith
 			pointValue: 100
 		}
 		{
-			question: question 2
-			answer: answer 2
+			question: This team has won the most World Series titles
+			answer: The New York Yankees
 			pointValue: 200
 		}
 		{
-			question: question 3
-			answer: answer 3
+			question: This football player holds the record for most pass receptions in a season
+			answer: Herman Moore
 			pointValue: 300
 		}
 		{
-			question: question 4
-			answer: answer 4
+			question: This person is the most successful Zimbabwean golfer
+			answer: Nick Price
 			pointValue: 400
 		}
 		{
-			question: question 5
-			answer: answer 5
+			question: The only person to win a gold medal in the Olympics for indoor and beach volleyball
+			answer: Karch Kiraly
 			pointValue: 500
 		}
 	]
 }
 {
 	class: swmasters.woj.core.Category
-	name: Category 3
+	name: Potent Potables
 	questions: [
 		{
-			question: question 1
-			answer: answer 1
+			question: Drink invented at Raffles Hotel in Singapore
+			answer: Singapore Sling
 			pointValue: 100
 		}
 		{
-			question: question 2
-			answer: answer 2
+			question: Greek wine with pine resin
+			answer: Etsina
 			pointValue: 200
 		}
 		{
-			question: question 3
-			answer: answer 3
+			question: Gin and dry vermouth
+			answer: Martini
 			pointValue: 300
 		}
 		{
-			question: question 4
-			answer: answer 4
+			question: Champagne and orange juice
+			answer: Mimosa
 			pointValue: 400
 		}
 		{
-			question: question 5
-			answer: answer 5
+			question: "Gin, lemon, and powdered sugar"
+			answer: Tom Collins
 			pointValue: 500
 		}
 	]
 }
 {
 	class: swmasters.woj.core.Category
-	name: Category 4
+	name: Animals
 	questions: [
 		{
-			question: question 1
-			answer: answer 1
+			question: World's tallest animal
+			answer: Giraffe
 			pointValue: 100
 		}
 		{
-			question: question 2
-			answer: answer 2
+			question: World's fastest animal
+			answer: Cheetah
 			pointValue: 200
 		}
 		{
-			question: question 3
-			answer: answer 3
+			question: The largest flightless bird of Australia
+			answer: Emu
 			pointValue: 300
 		}
 		{
-			question: question 4
-			answer: answer 4
+			question: In 2015 this horse won the triple crown
+			answer: American Pharoah
 			pointValue: 400
 		}
 		{
-			question: question 5
-			answer: answer 5
+			question: This South American animal is the smallest member of the camel family
+			answer: Vicuna
 			pointValue: 500
 		}
 	]
 }
 {
 	class: swmasters.woj.core.Category
-	name: Category 5
+	name: American History
 	questions: [
 		{
-			question: question 1
-			answer: answer 1
+			question: The original name of New York
+			answer: New Amsterdam
 			pointValue: 100
 		}
 		{
-			question: question 2
-			answer: answer 2
+			question: The founder of Maryland
+			answer: Cecil Calvert
 			pointValue: 200
 		}
 		{
-			question: question 3
-			answer: answer 3
+			question: The location of Fort Orange
+			answer: Albany
 			pointValue: 300
 		}
 		{
-			question: question 4
-			answer: answer 4
+			question: He organized the US Communist Party in 1919
+			answer: John Reed
 			pointValue: 400
 		}
 		{
-			question: question 5
-			answer: answer 5
+			question: Voting League established in 1928
+			answer: League of Women Voters
 			pointValue: 500
 		}
 	]
 }
 {
 	class: swmasters.woj.core.Category
-	name: Category 6
+	name: Science
 	questions: [
 		{
-			question: question 1
-			answer: answer 1
+			question: The study of fossils
+			answer: Paleontology
 			pointValue: 100
 		}
 		{
-			question: question 2
-			answer: answer 2
+			question: The act of joining atoms together
+			answer: Fusion
 			pointValue: 200
 		}
 		{
-			question: question 3
-			answer: answer 3
+			question: Copper and Zinc alloy
+			answer: Brass
 			pointValue: 300
 		}
 		{
-			question: question 4
-			answer: answer 4
+			question: The wavelength shorter than visible light
+			answer: Ultraviolet
 			pointValue: 400
 		}
 		{
-			question: question 5
-			answer: answer 5
+			question: The center of an atom
+			answer: Nucleus
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Television
+	questions: [
+		{
+			question: George Reeves action series
+			answer: Superman
+			pointValue: 100
+		}
+		{
+			question: Rod Sterling science fiction show
+			answer: The Twilight Zone
+			pointValue: 200
+		}
+		{
+			question: He lived in a pineapple under the sea
+			answer: SpongeBob SquarePants
+			pointValue: 300
+		}
+		{
+			question: "Before he was Walter White, Bryan Cranston starred in this show"
+			answer: Malcolm in the Middle
+			pointValue: 400
+		}
+		{
+			question: The Soprano family lived in this state
+			answer: New Jersey
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Women
+	questions: [
+		{
+			question: The first woman to race in the Daytona 500
+			answer: Danica Patrick
+			pointValue: 100
+		}
+		{
+			question: She was known as Little Miss Sure Shot
+			answer: Annie Oakley
+			pointValue: 200
+		}
+		{
+			question: This woman was named the Chair of the Federal Reserve in 2014
+			answer: Janet Yellen
+			pointValue: 300
+		}
+		{
+			question: This woman won two Nobel prizes
+			answer: Marie Curie
+			pointValue: 400
+		}
+		{
+			question: This woman was the White House media correspondent for over 50 years
+			answer: Helen Thomas
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: 2000s Music
+	questions: [
+		{
+			question: This rapper survived 9 gunshot wounds
+			answer: 50 Cent
+			pointValue: 100
+		}
+		{
+			question: This is the city the White Stripes are from
+			answer: Detroit
+			pointValue: 200
+		}
+		{
+			question: This singer is known as Jenny from the Block
+			answer: Jennifer Lopez
+			pointValue: 300
+		}
+		{
+			question: She won the first season of American Idol
+			answer: Kelly Clarkson
+			pointValue: 400
+		}
+		{
+			question: He is lead singer of Matchbox 20
+			answer: Rob Thomas
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Food
+	questions: [
+		{
+			question: A Hungarian meat stew is called this
+			answer: Goulash
+			pointValue: 100
+		}
+		{
+			question: "This German pastry is made apples, cherries, and cheese"
+			answer: Strudel
+			pointValue: 200
+		}
+		{
+			question: "This spicy Thai soup is made from shrimp, basil, and chili peppers"
+			answer: Tom Yum Goong
+			pointValue: 300
+		}
+		{
+			question: This is a spice and the capital of French Guiana
+			answer: Cayenne
+			pointValue: 400
+		}
+		{
+			question: This is known as a Quill Spice or Red Spice from an Evergreen tree
+			answer: Cinnamon
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: Cities
+	questions: [
+		{
+			question: The largest city in the US
+			answer: New York
+			pointValue: 100
+		}
+		{
+			question: The worlds oldest walled city
+			answer: Jericho
+			pointValue: 200
+		}
+		{
+			question: The city with the most fountains
+			answer: Rome
+			pointValue: 300
+		}
+		{
+			question: This city is known as the City of Lights
+			answer: Paris
+			pointValue: 400
+		}
+		{
+			question: The oldest state capital in the US
+			answer: Santa Fe
+			pointValue: 500
+		}
+	]
+}
+{
+	class: swmasters.woj.core.Category
+	name: The Civil War
+	questions: [
+		{
+			question: He was the president of the Confederate States of America
+			answer: Jefferson Davis
+			pointValue: 100
+		}
+		{
+			question: The number of states in the Union
+			answer: 23
+			pointValue: 200
+		}
+		{
+			question: "Lincoln's first choice to head the Union Army"
+			answer: Robert E Lee
+			pointValue: 300
+		}
+		{
+			question: This General won the battle at Shenandoah Valley
+			answer: Stonewall Jackson
+			pointValue: 400
+		}
+		{
+			question: This Civil War nurse was know as the Angel of the Battlefield
+			answer: Clara Barton
 			pointValue: 500
 		}
 	]
