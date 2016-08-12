@@ -40,10 +40,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import swmasters.woj.core.Category;
 
 public class Sector extends Sprite {   
-   private ShaderProgram shader;
-  
-   private static final Matrix4 modelView = new Matrix4();
-   
+   private ShaderProgram shader;   
    private Mesh mesh;
    private Texture texture;
    
@@ -92,6 +89,7 @@ public class Sector extends Sprite {
 	private PolygonSpriteBatch polyBatch;
 	private float polyAngle = -45f;
 	
+	/*
 	void flush() {
 	    //if we've already flushed
 	    if (idx==0)
@@ -114,7 +112,7 @@ public class Sector extends Sprite {
 	    shader.begin();
 
 	    //update the projection matrix so our triangles are rendered in 2D
-	    //shader.setUniformMatrix("u_projTrans", Gdx.app.camera.combined);
+	    shader.setUniformMatrix("u_projTrans", Gdx.app.getGraphics().getcamera.combined);
 
 	    //render the mesh
 	    mesh.render(shader, GL20.GL_TRIANGLES, 0, vertexCount);
@@ -127,6 +125,7 @@ public class Sector extends Sprite {
 	    //reset index to zero
 	    idx = 0;
 	}	
+	*/
 	
 	private void initMesh() {
 	    mesh = new Mesh(true, MAX_VERTS, 0, 
@@ -185,7 +184,8 @@ public class Sector extends Sprite {
 			
 		polySprite = new PolygonSprite(polyRegion);
 		polySprite.setOrigin(94, 0);
-		polySprite.setSize(128, 768);
+		polySprite.setBounds(polySprite.getX(), polySprite.getY(),
+		  	                 polySprite.getWidth(), polySprite.getHeight());
 		polyBatch = new PolygonSpriteBatch();
 	}
 	
@@ -210,6 +210,13 @@ public class Sector extends Sprite {
       initTexture();
       initSprite();
       
+   }
+   
+   @Override
+   public void setSize(float width, float height) {
+	   polySprite.setSize(width, height);
+	   polySprite.setBounds(polySprite.getX(), polySprite.getY(),
+			   polySprite.getWidth(), polySprite.getHeight());
    }
 
    /**
@@ -312,10 +319,7 @@ public class Sector extends Sprite {
 		
 		
 		polyBatch.begin();
-		//polyBatch.setProjectionMatrix();
-		polySprite.setBounds(0, 0, this.getWidth(), this.getHeight());
-		polySprite.setSize(32, 192);
-		//polySprite.rotate(this.getRotation());
+		polyBatch.setProjectionMatrix(batch.getProjectionMatrix());
 		polySprite.draw(polyBatch);
 		polyBatch.end();
 		

@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -21,7 +22,6 @@ import swmasters.woj.ui.gameboard.wheel.Sector.SectorType;
 
 public class Wheel extends Actor {
 
-	private ShapeRenderer renderer;
 	private final int MAX_SECTORS = 12;
 	private final int MAX_CATEGORY_SECTORS = 6;
 	private ArrayList<Sector> sectors;
@@ -29,8 +29,12 @@ public class Wheel extends Actor {
 	private int currentSectorIndex = 0;
 	private Sector sector;
 	private final int centerRadius = 50;
+	private Texture backgroundTexture;
 	
 	private void initSectors() {
+		
+		backgroundTexture = new Texture(Gdx.files.internal("assets/graphics/wheel/background.png"));
+		
 		sector = new Sector(SectorType.SECTOR_TYPE_BANKRUPT);
 		sector.setX(centerRadius / 2);
 		sector.setY(centerRadius / 2);
@@ -55,10 +59,12 @@ public class Wheel extends Actor {
 		}
 		
 		/* randomize the order of the sectors */
-		Collections.shuffle(sectors);
+		//Collections.shuffle(sectors);
 		
 		int offset = 0;
-		for (int sectorNumber = 0; sectorNumber < sectors.size(); sectorNumber++) {
+		for (int sectorNumber = 0;
+			 sectorNumber < sectors.size();
+			 sectorNumber++) {
 			Sector sector = sectors.get(sectorNumber);
 			sector.setBounds(0, 0, this.getWidth(), this.getHeight());
 			if (offset == 1) {
@@ -67,7 +73,6 @@ public class Wheel extends Actor {
 			else if (offset == 2) {
 				sector.setRotation(-90f);
 			}
-			//addActor(sector);
 			offset++;
 		}		
 	}
@@ -86,15 +91,23 @@ public class Wheel extends Actor {
 		return getNextSector();
 	}
 	
+	@Override
+	public void setSize(float width, float height) {
+		super.setSize(width, height);
+	}
+	
 	public Wheel(ArrayList<Category> categories) {
 		super();
 		loadSectors(categories);
 		initSectors();
-		renderer = new ShapeRenderer();
 	}
 	
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
+		
+		batch.draw(backgroundTexture, 0, 0);
+		batch.end();
+		
 		for (int sectorNumber = 0;
 		     sectorNumber < this.sectors.size();
 			 sectorNumber++) {
@@ -110,7 +123,10 @@ public class Wheel extends Actor {
 			else if (sectorNumber == 2) {
 				sector.rotate(2*360f/(float)MAX_SECTORS);
 			}
+			sector.setPosition(10, 10);
+			//sector.setSize(sector.getWidth() * 1.0f, sector.getHeight() * 1.0f);
 			sector.draw(batch, parentAlpha);
 		}
+		batch.begin();
 	}
 }
