@@ -6,8 +6,10 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import swmasters.woj.ui.gameboard.questionboard.QuestionPanel;
+import swmasters.woj.ui.gameboard.wheel.FreeSpinDialog;
 import swmasters.woj.ui.gameboard.wheel.Sector;
 import swmasters.woj.ui.gameboard.wheel.Wheel;
 
@@ -18,6 +20,7 @@ public class Game {
    private ArrayList<Player> players;       /**< list of players */
    private Wheel theWheel;                  /**< the wheel object */
    private ArrayList<Category> categories = new ArrayList<Category>();  /**< the list of categories in this round */
+   private Stage stage;						/**< the stage corresponding to the game GUI */
 
    /**
     * @brief returns the next player in the list
@@ -39,15 +42,20 @@ public class Game {
     * @brief Handle player spinning a category
     */
    private void onSpinCategory(Category currentCategory) {
-      /** TODO handle category spin */
 	   Question currentQuestion = currentCategory.getNextQuestion();
-
-	   // Must display question panel
-	   // Create a new dialog with question text, textbox, and submit button
-	   //QuestionPanel questionPanel = new QuestionPanel(currentQuestion.getQuestion());
 	   QuestionPanel questionPanel = new QuestionPanel(currentQuestion);
-	   // How to get WoJ stage variable here as input?
-	   //questionPanel.show(stage);
+	   questionPanel.show(stage);
+	   
+	   // Add or subtract points from the player's score based on answer
+	   if(currentQuestion.answeredCorrectly() == true){
+		   players.get(currentPlayer).increaseScoreBy(currentQuestion.getpointValue());
+	   }
+	   else{
+		   players.get(currentPlayer).decreaseScoreBy(currentQuestion.getpointValue());
+	   }
+	   
+	   // Next player's turn begins
+	   currentPlayer = getNextPlayer();
    }
 
    /**
@@ -61,11 +69,27 @@ public class Game {
     * @brief Handle player spinning lose a turn
     */
    private void onSpinLoseTurn() {
-      /** TODO add prompt to user to use token or not */
+	   // Get the current player object and whether they have free spin tokens or not
 	   Player player = players.get(currentPlayer);
-	   if(player.useAFreeTurn() == true){
-		   onSpinSpinAgain();
+	   boolean playerSpinCount = false;
+	   if(player.getfreeTurnCount() > 0){
+		   playerSpinCount = true;
+	   };
+	   
+	   // If the player has free spin tokens, open dialog asking to use token
+	   if(playerSpinCount){
+		   FreeSpinDialog freeSpin = new FreeSpinDialog(player);
+		   freeSpin.show(stage);
+		   // If the player chooses Yes, call use token method and spin again method
+		   if(freeSpin.returnResult() == true && player.useAFreeTurn()){
+			   onSpinSpinAgain();
+		   }
+		   // If the player chose no and/or has no free tokens, get next player
+		   else{
+			   currentPlayer = getNextPlayer();
+		   }
 	   }
+	   // If the player has no free tokens, get next player
 	   else{
 		   currentPlayer = getNextPlayer();
 	   }
@@ -79,11 +103,10 @@ public class Game {
       /** TODO launch category choice dialog with getNextPlayer() selected */
 	   int previousPlayer = currentPlayer;
 	   currentPlayer = getNextPlayer();
-
-	   // Next player chooses category for the current player
-	   // Must display choices and retrieve their chosen category
+	   
+	   // Dummy variable until category widgets implemented
 	   Category chosenCategory = new Category();
-
+	   
 	   // Return control to current player and go to category spin event
 	   currentPlayer = previousPlayer;
 	   onSpinCategory(chosenCategory);
@@ -96,10 +119,9 @@ public class Game {
       /** TODO handle player's choice spin */
       /** TODO launch category choice dialog with currentPlayer selected */
 
-	   // Current player chooses their category
-	   // Must display choices and retrieve their chosen category
+	   // Dummy variable until category widgets implemented
 	   Category chosenCategory = new Category();
-
+	   
 	   // Go to category spin event
 	   onSpinCategory(chosenCategory);
    }
@@ -162,13 +184,14 @@ public class Game {
     * @param[in] player2
     *    second player
     */
-   private void initGame(Player player1, Player player2) {
+   private void initGame(Player player1, Player player2, Stage stage) {
       generateQuestionsAndCategories();
       this.theWheel = new Wheel(this.categories);
      this.players = new ArrayList<Player>();
      this.players.add(player1);
      this.players.add(player2);
      this.currentPlayer = 0;
+     this.stage = stage;
    }
 
    /**
@@ -179,7 +202,7 @@ public class Game {
     * @param[in] player2
     *    second player
     */
-   public Game(Player player1, Player player2) {
-      initGame(player1, player2);
+   public Game(Player player1, Player player2, Stage stage) {
+      initGame(player1, player2, stage);
    }
 }
