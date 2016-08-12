@@ -5,6 +5,7 @@ public class Question {
   private String answer;   /**< The text of the answer to the question */
   private Integer pointValue; /**< The integer value of the points for the question */
   private boolean answered; /**< The boolean for whether the question has been answered or not */
+  private boolean answeredCorrectly;		/**< The boolean for whether or not the question was answered correctly */
 
    /**
     * @brief Construct a Question
@@ -118,11 +119,20 @@ public class Question {
     * @return correct
     *    The boolean value for whether the answer was correct
     */
-  public boolean verifyAnswer(String stringToVerify) {
+  public void verifyAnswer(String stringToVerify) {
     if(stringToVerify.equals(this.answer)) {
-      return true;
+      answeredCorrectly = true;
     }
-    return false;
+    answeredCorrectly = false;
   }
 
+   /**
+    * @brief Return whether the question was answered correctly.
+    *
+    * @return correct
+    *    The boolean value for whether the answer was correct
+    */
+	public boolean answeredCorrectly() {
+        return answeredCorrectly;
+	}
 }

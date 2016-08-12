@@ -26,7 +26,6 @@ public class QuestionPanel extends WidgetGroup {
 	 * @param questionInput
 	 */
 	public QuestionPanel(final Question questionInput){
-	//public QuestionPanel(String questionInput){
 		question = questionInput.getQuestion();
 		// Create a default font
 		BitmapFont font = new BitmapFont();
@@ -34,7 +33,9 @@ public class QuestionPanel extends WidgetGroup {
 		// Create a label style for the question label
 		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
 		Label questionLabel = new Label(question, labelStyle);
+		questionLabel.setFontScale(1.2f);
 		questionLabel.setAlignment(Align.center);
+		questionLabel.setWrap(true);
 		labelStyle.fontColor = Color.WHITE;
 		
 		// Create a tile skin and texture for the submit button
@@ -51,14 +52,14 @@ public class QuestionPanel extends WidgetGroup {
 		textButtonStyle.checked = tileSkin.newDrawable("white", Color.LIGHT_GRAY);
 		textButtonStyle.over = tileSkin.newDrawable("white", Color.LIGHT_GRAY);
 		textButtonStyle.font = font;
-		textButtonStyle.font.getData().setScale(3, 3);
+		textButtonStyle.font.getData().setScale(1f);
 		textButtonStyle.fontColor = Color.WHITE;
 		tileSkin.add("default", textButtonStyle);
 		
 		// Create a new text button for the submit button
-		TextButton submit = new TextButton("Submit", tileSkin);
+	    TextButton submit = new TextButton("Submit", tileSkin);
 		// Create a button table to hold the submit button
-		float btnSize = 150f;
+		float btnSize = 50f;
 		Table buttonTable = new Table();
 	    Table contentsTable = new Table();
 	    contentsTable.setWidth(500);
@@ -67,51 +68,56 @@ public class QuestionPanel extends WidgetGroup {
 	    
 	    // Create a text field style for player's answer text field
 		TextFieldStyle style = new TextFieldStyle();
-		style.fontColor = Color.WHITE;
+		style.fontColor = Color.LIGHT_GRAY;
 		style.font = new BitmapFont();
-		style.font.getData().scale(2);
+		style.font.getData().scale(.3f);
 		
 		// Create the text field for the player's answer
-		final TextField answerBox = new TextField("", style);
+	    final TextField answerBox = new TextField("", style);
 	    answerBox.setMessageText("Your answer");
 	    
 	    // Add the question label and the answer text field to the contents table
-	    contentsTable.add(questionLabel);
-	    contentsTable.row();
-	    contentsTable.add(answerBox).expand().fill();
+	    Table questionTable = new Table();
+	    Table answerTable = new Table();
+	    answerTable.setWidth(500);
+	    
+	    questionTable.add(questionLabel).row();
+	    answerTable.add(answerBox).row();
+
+	    contentsTable.add(questionTable).width(500).height(80).row();
+	    contentsTable.add(answerTable).width(500).row();
 	    
 	    // Create the question dialog box
 		Skin skinDialog = new Skin(Gdx.files.internal("Assets/skins/default/uiskin.json"));
-		dialog = new Dialog("", skinDialog) {
+		dialog = new Dialog("Question for " + questionInput.getpointValue() + " points", skinDialog) {
 			@Override
 			public float getPrefWidth(){
 				// dialog width
-				return 700f;
+				return 400f;
 			}
 			@Override
 			public float getPrefHeight(){
 				// dialog height
-				return 400f;
+				return 250f;
 			}
 		};
 		dialog.setModal(true);
-		dialog.setMovable(false);
+		dialog.setMovable(true);
 		dialog.setResizable(false);
+		dialog.setScale(2, 2);
 	    
 		// Add the content table and button table to the dialog box
 	    dialog.getContentTable().add(contentsTable).center();
-		dialog.getButtonTable().add(buttonTable).center().padBottom(60f);	
+		dialog.getButtonTable().add(buttonTable).center().padBottom(10f);	
 		dialog.setName("questionPanelDialog");
+		dialog.pack();
 		
 		// Listen for user clicking the submit button
 		submit.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-				// From here, should return the answer to the method calling it
-				// The method calling it should call the answer checking method with the box text as an argument
-				System.out.println(answerBox.getText());
+				// Verify the answer given by the user
 				questionInput.verifyAnswer(question);
-				
 				dialog.hide();
 				dialog.cancel();
 				dialog.remove();
