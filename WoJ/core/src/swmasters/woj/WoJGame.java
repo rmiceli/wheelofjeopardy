@@ -32,8 +32,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import swmasters.woj.core.Category;
 import swmasters.woj.core.Game;
 import swmasters.woj.core.Player;
+import swmasters.woj.core.Question;
 import swmasters.woj.ui.gameboard.GameBoard;
 import swmasters.woj.ui.gameboard.questionboard.QuestionBoard;
+import swmasters.woj.ui.gameboard.questionboard.QuestionPanel;
+import swmasters.woj.ui.gameboard.wheel.FreeSpinDialog;
 
 /**
  * @brief Main application class
@@ -67,7 +70,7 @@ public class WoJGame extends ApplicationAdapter {
       Gdx.input.setInputProcessor(stage);
       Player player1 = new Player("Alice");
       Player player2 = new Player("Bob");
-      gameBoard = new GameBoard(new Game(player1, player2));
+      gameBoard = new GameBoard(new Game(player1, player2, stage));
       gameBoard.setFillParent(true);
       stage.addActor(gameBoard);
    }
